@@ -13,7 +13,7 @@ function Home() {
             const response = await axios.get(
                 // `${process.env.SERVER_URL}/transections`
 
-                "http://localhost:8000/api/transections"
+                "https://expense-tracker-backend-gray-one.vercel.app/api/transections"
             );
             setTransections(response.data?.message || []);
         } catch (error) {
@@ -27,7 +27,7 @@ function Home() {
     // Fetch summary
     const fetchSummary = useCallback(async () => {
         try {
-            const response = await axios.get("http://localhost:8000/api/transections/transectionSumary");
+            const response = await axios.get("https://expense-tracker-backend-gray-one.vercel.app/api/transections/transectionSumary");
             setTotalExpense(response.data?.transection?.totalExpense || 0);
         } catch (error) {
             console.log(error);
@@ -57,7 +57,7 @@ function Home() {
     // Update total expense and delete transaction
     const handleDeleteTransection = useCallback(async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/api/transections/${id}`);
+            await axios.delete(`https://expense-tracker-backend-gray-one.vercel.app/api/transections/${id}`);
 
             setTransections((prevTransactions) =>
                 prevTransactions.filter((transection) => transection.id !== id)

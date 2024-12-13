@@ -16,7 +16,7 @@ export const ExpenseCategoryChart = () => {
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/transections'); // Replace with your API URL
+                const response = await axios.get('https://expense-tracker-backend-gray-one.vercel.app/api/transections'); // Replace with your API URL
                 const transactions = response.data.message;
                 const data = prepareChartData(transactions);
                 setChartData(data);
@@ -68,8 +68,8 @@ export const ExpenseCategoryChart = () => {
                 borderColor: chartColors.green,
             },
         },
-        // Set chart background to white
-        backgroundColor: '#ecb365',
+
+
     };
 
     return <Bar data={chartData} options={options} />;

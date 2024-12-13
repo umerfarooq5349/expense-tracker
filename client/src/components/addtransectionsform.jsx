@@ -17,7 +17,7 @@ const AddTransactionForm = () => {
             // Convert amount to a float before sending to the backend
             data.amount = parseFloat(data.amount);
             // Send data to your API
-            await axios.post('http://localhost:8000/api/transections', { data });
+            await axios.post('https://expense-tracker-backend-gray-one.vercel.app/api/transections', { data });
 
             toast.success('Transaction added', { position: 'bottom-right' });
         } catch (error) {
