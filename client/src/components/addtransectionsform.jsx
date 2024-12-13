@@ -18,9 +18,7 @@ const AddTransactionForm = () => {
             data.amount = parseFloat(data.amount);
 
             await axios.post(
-                `${process.env.SERVER_URL}/transections`
-                // 'https://expense-tracker-backend-gray-one.vercel.app/api/transections'
-                , { data });
+                'https://expense-tracker-backend-gray-one.vercel.app/api/transections', { data });
 
             toast.success('Transaction added', { position: 'bottom-right' });
         } catch (error) {
