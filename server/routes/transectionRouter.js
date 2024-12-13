@@ -4,11 +4,15 @@ import {
   addTransection,
   deleteTransection,
   getTransectionsSummary,
+  validateTransection,
 } from "../controller/transectionController.js";
 
 const transectionRouter = Express.Router();
 
-transectionRouter.route("/").get(getTransections).post(addTransection);
+transectionRouter
+  .route("/")
+  .get(getTransections)
+  .post(validateTransection, addTransection);
 
 // transectionRouter.post("/", addTransection);
 

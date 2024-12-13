@@ -7,7 +7,7 @@ import transectionRouter from "./routes/transectionRouter.js";
 const app = Express();
 
 const corsOptions = {
-  origin: "localhost:3000", // Allow requests from this origin
+  origin: true, // Allow requests from this origin
   credentials: true, // Allow cookies to be sent
 };
 

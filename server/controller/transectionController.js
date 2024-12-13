@@ -1,6 +1,7 @@
 import { transectionSchema } from "./../schema/transectionSchema.js";
 import { transectionsList } from "./../model/transectionModel.js";
 import { sendResponse } from "../utils/sendResponse.js";
+// import { date } from "zod";
 
 const getTransections = (req, res) => {
   return sendResponse(res, 200, transectionsList);
@@ -9,10 +10,10 @@ const getTransections = (req, res) => {
 };
 
 const addTransection = (req, res) => {
-  const { transectionReq } = req.body;
-
+  const { newTransection } = req.body;
+  console.log(newTransection);
   try {
-    transectionSchema.parse(transectionReq);
+    transectionSchema.parse(newTransection);
   } catch (error) {
     return sendResponse(res, 403, "Not in a required format", null, error);
 
@@ -21,13 +22,13 @@ const addTransection = (req, res) => {
 
   const transections = transectionsList;
   if (
-    transections.find((transection) => transection.id === transectionReq.id)
+    transections.find((transection) => transection.id === newTransection.id)
   ) {
     return sendResponse(res, 403, "Record already exits");
     // res.status(403).json({ message: "Id already exists" });
   }
 
-  transections.push(transectionReq);
+  transections.push(newTransection);
   return sendResponse(res, 200, "Transection added", transections);
 
   //   res.status(200).json({ transections });
@@ -36,15 +37,21 @@ const addTransection = (req, res) => {
 const deleteTransection = (req, res) => {
   const { id } = req.params;
   const transections = transectionsList;
-  //   console.log(id);
+  console.log("id", id);
 
-  const deletetransection = transections.indexOf(
+  const deleteTransectionIndex = transections.indexOf(
     transections.find((transection) => transection.id === id)
   );
-  if (deleteTransection) return sendResponse(res, 404, "Transection not found");
+  console.log("index", deleteTransectionIndex);
 
-  const deleted = transections.splice(deletetransection, deletetransection);
-
+  if (deleteTransectionIndex === -1)
+    return sendResponse(res, 404, "Transection not found");
+  if (deleteTransectionIndex === 0) {
+    transections.pop();
+    return sendResponse(res, 200, "Transection deleted");
+  }
+  transections.splice(deleteTransectionIndex, deleteTransectionIndex);
+  // console.log("delete", deleted);
   return sendResponse(res, 200, "Transection deleted");
 
   //   res.status(200).json({ message: "Transection deleted" });
@@ -67,9 +74,21 @@ const getTransectionsSummary = (req, res) => {
   //   res.status(200).json({ totalExpense, totaltransections });
 };
 
+const validateTransection = (req, res, next) => {
+  const { data } = req.body;
+
+  console.log(data);
+  const id = new Date().getMilliseconds().toString();
+
+  const newTransection = { ...data, id, ammont: data.amount.toString() };
+
+  req.body = { newTransection };
+  next();
+};
 export {
   getTransections,
   addTransection,
   deleteTransection,
   getTransectionsSummary,
+  validateTransection,
 };

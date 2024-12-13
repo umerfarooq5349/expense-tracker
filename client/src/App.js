@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/home";
+import AddTransactions from "./pages/addTransections";
+import Navbar from "./components/navbar";
+import Summary from "./pages/summary";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="bg-black">
+        <div className="fixed top-0 w-full flex justify-center z-50">
+          <div className="w-5/6">
+            <Navbar />
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center min-h-screen pt-20">
+          <div className="w-5/6">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/summary" element={<Summary />} />
+              <Route path="/addTransactions" element={<AddTransactions />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
