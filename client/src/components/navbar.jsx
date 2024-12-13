@@ -16,7 +16,7 @@ function Navbar() {
     ];
 
     return (
-        <div className="fixed z-50 w-full text-xl font-bold flex-none transition-colors mt-4 bg-white shadow-md">
+        <div className="fixed z-50 w-5/6 text-xl font-bold flex-none transition-colors mt-4 ">
             <div className="px-4 flex justify-between items-center py-4">
                 {/* Logo */}
                 <div>
