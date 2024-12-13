@@ -4,10 +4,10 @@ import axios from 'axios';
 import { Chart as ChartJs, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { prepareChartData, chartColors } from './data';
 
-// Register chart.js components
+
 ChartJs.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-// Color palette
+
 
 
 export const ExpenseCategoryChart = () => {
@@ -58,12 +58,12 @@ export const ExpenseCategoryChart = () => {
                 },
             },
         },
-        // Set chart background color to white
+
         layout: {
             padding: 20,
         },
         elements: {
-            // Optional: Set border color for the bars
+
             bar: {
                 borderColor: chartColors.green,
             },

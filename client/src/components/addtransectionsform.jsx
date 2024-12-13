@@ -7,17 +7,20 @@ import { transectionSchema } from '../schema/transectionSchema';
 
 const AddTransactionForm = () => {
     const { control, handleSubmit, formState: { errors, isValid } } = useForm({
-        resolver: zodResolver(transectionSchema), // Use Zod for form validation
-        mode: 'onBlur', // Validate on blur to show error when field is touched
+        resolver: zodResolver(transectionSchema),
+        mode: 'onBlur',
     });
 
-    // Handle form submission
+
     const onSubmit = async (data) => {
         try {
-            // Convert amount to a float before sending to the backend
+
             data.amount = parseFloat(data.amount);
-            // Send data to your API
-            await axios.post('https://expense-tracker-backend-gray-one.vercel.app/api/transections', { data });
+
+            await axios.post(
+                `${process.env.SERVER_URL}/transections`
+                // 'https://expense-tracker-backend-gray-one.vercel.app/api/transections'
+                , { data });
 
             toast.success('Transaction added', { position: 'bottom-right' });
         } catch (error) {
@@ -33,7 +36,7 @@ const AddTransactionForm = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-6">
 
-                    {/* Title */}
+
                     <div className="mb-4">
                         <label htmlFor="title" className="block text-black font-semibold">Title</label>
                         <Controller
@@ -53,7 +56,7 @@ const AddTransactionForm = () => {
                         {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
                     </div>
 
-                    {/* Amount */}
+
                     <div className="mb-4">
                         <label htmlFor="amount" className="block text-black font-semibold">Amount</label>
                         <Controller
@@ -78,7 +81,7 @@ const AddTransactionForm = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-6">
 
-                    {/* Category */}
+
                     <div className="mb-4">
                         <label htmlFor="category" className="block text-black font-semibold">Category</label>
                         <Controller
@@ -108,7 +111,7 @@ const AddTransactionForm = () => {
                         {errors.category && <p className="text-red-500 text-sm">{errors.category.message}</p>}
                     </div>
 
-                    {/* Type */}
+
                     <div className="mb-4">
                         <label className="block text-black font-semibold mb-2">Type</label>
                         <Controller
@@ -139,7 +142,7 @@ const AddTransactionForm = () => {
                 </div>
 
                 <div className="mb-6">
-                    {/* Date */}
+
                     <label htmlFor="date" className="block text-black font-semibold">Date</label>
                     <Controller
                         name="date"
@@ -157,10 +160,10 @@ const AddTransactionForm = () => {
                     {errors.date && <p className="text-red-500 text-sm">{errors.date.message}</p>}
                 </div>
 
-                {/* Submit Button */}
+
                 <button
                     type="submit"
-                    disabled={!isValid} // Disable submit button when form is not valid
+                    disabled={!isValid}
                     className={`w-full py-3 font-semibold rounded-md ${isValid ? 'bg-green text-white hover:bg-green-700' : 'bg-gray-300 text-gray-500 cursor-not-allowed'} transition duration-300`}
                 >
                     Submit

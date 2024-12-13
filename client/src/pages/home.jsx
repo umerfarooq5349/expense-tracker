@@ -7,7 +7,7 @@ function Home() {
     const [transections, setTransections] = useState([]);
     const [totalExpense, setTotalExpense] = useState(0);
 
-    // Fetch transactions
+
     const fetchTransections = useCallback(async () => {
         try {
             const response = await axios.get(
@@ -24,7 +24,7 @@ function Home() {
         }
     }, []);
 
-    // Fetch summary
+
     const fetchSummary = useCallback(async () => {
         try {
             const response = await axios.get("https://expense-tracker-backend-gray-one.vercel.app/api/transections/transectionSumary");
@@ -48,13 +48,13 @@ function Home() {
         setTotalExpense(total);
     };
 
-    // Fetch data on component mount
+
     useEffect(() => {
         fetchTransections();
         fetchSummary();
     }, [fetchTransections, fetchSummary]);
 
-    // Update total expense and delete transaction
+
     const handleDeleteTransection = useCallback(async (id) => {
         try {
             await axios.delete(`https://expense-tracker-backend-gray-one.vercel.app/api/transections/${id}`);
@@ -63,8 +63,8 @@ function Home() {
                 prevTransactions.filter((transection) => transection.id !== id)
             );
 
-            // Re-fetch or recalculate total expense after deletion
-            fetchSummary(); // Fetch the updated summary
+            // Re-fetch 
+            fetchSummary();
             toast.success("Transaction deleted successfully", { position: "bottom-right" });
         } catch (error) {
             toast.error(

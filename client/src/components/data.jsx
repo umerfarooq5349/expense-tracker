@@ -20,7 +20,7 @@ export const prepareChartData = (transactions) => {
     }
   });
 
-  // Combine categories from both expense and income
+
   const categories = Array.from(new Set([
     ...Object.keys(expensesByCategory),
     ...Object.keys(incomeByCategory),

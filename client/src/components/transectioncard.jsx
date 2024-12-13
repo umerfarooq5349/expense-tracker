@@ -32,7 +32,7 @@ function Transection({ transection, onDelete }) {
                     </p>
                 </div>
 
-                {/* Delete Button */}
+
                 <button onClick={onDelete}
 
                     type="button"

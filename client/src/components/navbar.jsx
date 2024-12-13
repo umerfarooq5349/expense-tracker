@@ -18,14 +18,14 @@ function Navbar() {
     return (
         <div className="fixed z-50 w-5/6 text-xl font-bold flex-none transition-colors mt-4 ">
             <div className="px-4 flex justify-between items-center py-4">
-                {/* Logo */}
+
                 <div>
                     <a href={'/'} className="font-jostBold text-4xl text-green hover:text-yellow transition duration-300">
                         Expense Tracker
                     </a>
                 </div>
 
-                {/* Mobile Hamburger Icon */}
+
                 <div className="md:hidden flex items-center">
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -35,7 +35,7 @@ function Navbar() {
                     </button>
                 </div>
 
-                {/* Desktop Menu */}
+
                 <div className="hidden md:flex space-x-6">
                     {navData.map((n, index) => (
                         <Link
@@ -49,14 +49,14 @@ function Navbar() {
                 </div>
             </div>
 
-            {/* Mobile Slide-out Menu */}
+
             <div
                 className={`md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition-all duration-300 ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                     }`}
                 onClick={() => setIsMenuOpen(false)}
             >
                 <div
-                    className={`fixed left-0 top-0 w-2/3 bg-white h-full p-6 transition-transform duration-300 ${isMenuOpen ? 'transform translate-x-0' : 'transform -translate-x-full'
+                    className={`fixed left-0 top-0 w-2/3 bg-black h-full p-6 transition-transform duration-300 ${isMenuOpen ? 'transform translate-x-0' : 'transform -translate-x-full'
                         }`}
                 >
                     <div className="flex justify-end">
